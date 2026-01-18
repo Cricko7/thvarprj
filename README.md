@@ -103,6 +103,7 @@ _________________
 
 ## 🚀 ЗАПУСК
 ```bash
+cd thvarprj
 pip install -r requirements.txt
 python solution.py
 ```
