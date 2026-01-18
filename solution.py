@@ -11,7 +11,7 @@ from scipy import stats
 import seaborn as sns
 import os
 
-# 📖 ЧТЕНИЕ ДАННЫХ ИЗ EXCEL
+# 📖 ЧТЕНИЕ ДАННЫХ ИЗ EXCEL + НАГЛЯДНЫЙ ВЫВОД
 print("📖 thvarprj: Загрузка enterprises_data.xlsx...")
 df = pd.read_excel('enterprises_data.xlsx')
 X = df['X7_Премии'].values  # Столбец C
@@ -21,6 +21,13 @@ n = len(X)
 print(f"✅ thvarprj: {n} предприятий загружено")
 print(f"   X₇ (премии): {X.min():.2f}...{X.max():.2f}")
 print(f"   X₁: {Y.min():.2f}...{Y.max():.2f}")
+
+# 🔥 НОВЫЙ БЛОК: ВЫВОД ИСХОДНЫХ ДАННЫХ
+print("\n📋 ИСХОДНЫЕ ДАННЫЕ (первые 10 + последние 5 строк):")
+print("="*50)
+print(df[['Предприятие', 'X7_Премии', 'X1_Производительность']].head(10).to_string(index=False))
+print("         ... (показаны 10 из 50) ...")
+print(df[['Предприятие', 'X7_Премии', 'X1_Производительность']].tail(5).to_string(index=False))
 
 def task1_descriptive_stats(X, Y):
     """📊 Задание 1: Описательные статистики"""
@@ -97,7 +104,7 @@ axes[0].plot(X, intercept + slope*X, 'r-', linewidth=3,
 axes[0].set_xlabel('X₇: Премии (тыс.руб./чел.)', fontsize=11)
 axes[0].set_ylabel('X₁: Производительность труда', fontsize=11)
 axes[0].legend(); axes[0].grid(True, alpha=0.3)
-axes[0].set_title('📈 Регрессия Y на X (Задание 2)', fontsize=12)
+axes[0].set_title('Регрессия Y на X (Задание 2)', fontsize=12)  # Без эмодзи
 
 axes[1].hist(X, bins=15, alpha=0.7, edgecolor='black', color='lightcoral')
 axes[1].axvline(np.mean(X), color='r', lw=3, ls='--', 
@@ -107,7 +114,7 @@ axes[1].axvline(ci['ДИ_95%'][0], color='orange', lw=2, ls=':',
 axes[1].set_xlabel('X₇: Премии', fontsize=11)
 axes[1].set_ylabel('Частота', fontsize=11)
 axes[1].legend(); axes[1].grid(True, alpha=0.3)
-axes[1].set_title('📊 Доверительный интервал (Задание 3)', fontsize=12)
+axes[1].set_title('Доверительный интервал (Задание 3)', fontsize=12)  # Без эмодзи
 
 plt.tight_layout()
 plt.savefig('results/thvarprj_full_report.png', dpi=300, bbox_inches='tight')
